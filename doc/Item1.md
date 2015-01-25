@@ -41,3 +41,11 @@ public static <K, V> HashMap<K, V> newInstance() {
   return new HashMap(K, V)
 }
 ```
+
+### 缺点
+
+#### 不包含公有或受保护的构造器，不能被子类化
+
+但关于这一点，也正符合了鼓励程序使用复合，而不是继承的特点
+
+#### 和其他静态方法没有任何区别
