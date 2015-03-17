@@ -33,7 +33,23 @@ public class Herb {
 				new Herb("Parsley", Type.BIENNIAL),
 				new Herb("Rosemary", Type.PERENNIAL) };
 
-		// Using an EnumMap to associate data with an enum - Page 162
+        // Using ordinal() to index an array - DON'T DO THIS
+        Set<Herb>[] herbsByType1 = // Index by Herb.Type.ordinal()
+                (Set<Herb>[]) new Set[Herb.Type.values().length]; // <--- 数组和泛型无法兼容
+        for (int i = 0; i < herbsByType1.length; i++) {
+            herbsByType1[i] = new HashSet<Herb>();
+        }
+
+        for (Herb h : garden) {
+            herbsByType1[h.type.ordinal()].add(h);
+        }
+
+        //Print
+        for (int i = 0; i < herbsByType1.length; i++) {
+            System.out.printf("%s: %s%n", Herb.Type.values()[i], herbsByType1[i]);
+        }
+
+        // Using an EnumMap to associate data with an enum - Page 162
 		Map<Herb.Type, Set<Herb>> herbsByType = new EnumMap<Herb.Type, Set<Herb>>(
 				Herb.Type.class);
 		for (Herb.Type t : Herb.Type.values())
